@@ -1,8 +1,6 @@
 
 
 package com.codeup.springblog.controllers;
-import com.codeup.springblog.models.Post;
-import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
 import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class PostController<PostRepository, UserRepository, EmailService> {
+public class PostController<PostRepository, UserRepository, EmailService, Post> {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
