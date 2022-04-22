@@ -1,11 +1,10 @@
-
-
 package com.codeup.springblog.controllers;
-import com.codeup.springblog.repos.UserRepository;
+
 import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -22,11 +21,12 @@ public class PostController<PostRepository, UserRepository, EmailService, Post> 
         this.emailService = emailService;
     }
 
+
     @GetMapping("/posts")
     public String showPosts(Model model) {
         List<Post> allPosts = postDao.findAll();
         model.addAttribute("posts", allPosts);
-        return "post/index";
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
@@ -34,13 +34,13 @@ public class PostController<PostRepository, UserRepository, EmailService, Post> 
         Post post = postDao.getById(id);
         model.addAttribute("postId", id);
         model.addAttribute("post", post);
-        return "post/show";
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
     public String showCreatePostForm(Model model) {
-        model.addAttribute("post", new Post());
-        return "post/create";
+        model.addAttribute("newPost", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
@@ -60,7 +60,7 @@ public class PostController<PostRepository, UserRepository, EmailService, Post> 
     public String showEditPostForm(@PathVariable long id, Model model) {
         Post postToEdit = postDao.getById(id);
         model.addAttribute("postToEdit",postToEdit);
-        return "post/edit";
+        return "posts/edit";
     }
 
     @PostMapping("/posts/edit/{id}")
