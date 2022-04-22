@@ -3,51 +3,43 @@ package com.codeup.springblog.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "posts")
+@Table(name="posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String body;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private User users;
-
-    public User getUsers() {
-        return users;
-    }
-
-    public void setUsers(User users) {
-        this.users = users;
-    }
-
     public Post() {
-    }
-
-    public Post(long id, String title, String body) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
-
-    public Post(String title, String body) {
-        this.title = title;
-        this.body = body;
     }
 
     public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
+        this.user = user;
+    }
+
+    public Post(long id, String title, String body, User user) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -67,19 +59,11 @@ public class Post {
         this.body = body;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setId(long id) {
+        this.id = id;
     }
 }

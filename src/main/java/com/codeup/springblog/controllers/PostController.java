@@ -1,15 +1,20 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repos.PostRepository;
+import com.codeup.springblog.repos.UserRepository;
 import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
-public class PostController<PostRepository, UserRepository, EmailService, Post> {
+public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
@@ -56,14 +61,14 @@ public class PostController<PostRepository, UserRepository, EmailService, Post> 
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/edit/{id}")
+    @GetMapping("/posts/{id}/edit")
     public String showEditPostForm(@PathVariable long id, Model model) {
         Post postToEdit = postDao.getById(id);
         model.addAttribute("postToEdit",postToEdit);
         return "posts/edit";
     }
 
-    @PostMapping("/posts/edit/{id}")
+    @PostMapping("/posts/{id}/edit")
     public String editPost(
             @PathVariable long id,
             @ModelAttribute Post updatedPost

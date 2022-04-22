@@ -1,14 +1,9 @@
 package com.codeup.springblog.repos;
-
-
 import com.codeup.springblog.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-public interface PostRepository extends JpaRepository<Post,Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
+    Post findPostById(long id);
 
-    @Query("from Post a where a.id = ?1")
-    Post getPostById ( long id);
-
-
+    Post findByTitle(String post_to_be_deleted);
 }
