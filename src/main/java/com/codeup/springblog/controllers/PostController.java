@@ -52,7 +52,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postCreate(@ModelAttribute Post post) {
-//        User user = userDao.getById(1L);
+
         post.setUser( (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         emailService.prepareAndSendPost(post,"Another Post", "Notice of post posted");
         postDao.save(post);
